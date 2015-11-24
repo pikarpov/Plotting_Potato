@@ -15,12 +15,13 @@ Description:
 
 Future Updates:
 
-       - Comprehensive fitting of different types of functions
+       - Comprehensive fitting routines
        - Error calculations
        - Multi-Dimensional Graphs
 
 Developer History:
 
-	  - Platon Karpov (Creator)   (Graduated 2016)
-	  - Patrick Payne (Developer) (Graduates 2018)
+	  1) Platon Karpov (Creator)   
+	  
+	  2) Patrick Payne (Developer) 
 	  
