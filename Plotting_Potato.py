@@ -74,10 +74,10 @@ def PlotData():
     
     values = ImportData(filename, sheetnumb)
     
-    x = values[1]     #Column containing x-values
-    y = values[2]     #Column containing y-values
-    xerr = values[3]  #Column containing error values for x  
-    yerr = values[4]  #Column containing error values for y
+    x = values[0]     #Column containing x-values
+    y = values[1]     #Column containing y-values
+    xerr = values[2]  #Column containing error values for x  
+    yerr = values[3]  #Column containing error values for y
     
     #plot the data; index of values[i] corresponds to column #, starting with 0
     plt.plot(x, y, marker = 'o', linestyle='None', label = 'Data Set 1')
