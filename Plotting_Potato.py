@@ -48,7 +48,7 @@ def main():
     PlotFunction()
 
     #position of the legend, can be from 1 to 10
-    #plt.legend(loc=1)
+    plt.legend(loc=4)
     plt.grid(True)
 
     #figure x and y ranges are automatic unless specified
@@ -80,7 +80,7 @@ def PlotData():
     yerr = values[3]  #Column containing error values for y
 
     #plot the data; index of values[i] corresponds to column #, starting with 0
-    plt.plot(x, y, marker = 'o', linestyle='None', label = 'Data Set 1')
+    plt.plot(x, y, marker = 'o', linestyle='None', label = 'Cookies')
     #determines the line of best fit as a first order polynomial
     coef = np.polyfit(x, y , 1)
     fit = np.poly1d(coef)
@@ -90,7 +90,7 @@ def PlotData():
 
     #plot the errorbars
 
-    plt.errorbar(x, y, xerr, yerr, linestyle="None", color='blue')
+    plt.errorbar(x, y, xerr, yerr, linestyle="None", color='black')
 
     #find chi-squared in the slope
     expected = fit(values[1]) #takes the equation from the fit and calculates the expected values
