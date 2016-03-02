@@ -111,7 +111,7 @@ def PlotFunction():
     #assing what values of x to use in form np.linspace(min,max,number of points to take)
     x = np.linspace(-1,1,100)
 
-    y = abs(sin(3*x))/4 + .2
+    y = abs(sin(3*x))/2 + 2
 
     plt.plot(x, y, color ='red', label = 'BoobEyes')
 
