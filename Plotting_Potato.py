@@ -8,7 +8,7 @@ Plotting Potato is here to plot:
     linear, semilog, log funcitons
 
 To set filepath, a function, and edit various parameters of the graphs,
-go to corresponding def:  PlotData or PlotFunction
+go to corresponding def:  PlotData or PlotFunction or FitFunction
 
 By default, everything will be constructed on the same plot.
 
@@ -20,7 +20,6 @@ gl hf
 -Platobob
 '''
 
-from pylab import *
 from matplotlib import style
 import matplotlib.pyplot as plt
 from numpy import genfromtxt
@@ -29,6 +28,7 @@ import sys
 import numpy as np
 from scipy.stats import chisquare
 from scipy.stats import linregress
+from scipy.optimize import curve_fit
 
 def main():
     #size of the plot window
@@ -48,6 +48,7 @@ def main():
     #Comment out whichever you don't need here
     PlotData()
     PlotFunction()
+    FitFunction()
 
     #position of the legend, can be from 1 to 10
     plt.legend(loc=4)
@@ -68,6 +69,8 @@ def main():
     plt.show()
 
 def PlotData():
+    print "----------- Begin PlotData -----------"     
+    
     #path to your data
     filename = r'data.xlsx'
 
@@ -86,35 +89,35 @@ def PlotData():
     #determines the line of best fit as a first order polynomial
     coef = np.polyfit(x, y , 1)
     fit = np.poly1d(coef)
-    print "Line of best fit:", fit
+    print "\n Line of best fit:", fit
     x_space = np.linspace(-2.0, 2.0 ,1000)
     plt.plot(x_space, fit(x_space))
 
     #plot the errorbars
-
-    plt.errorbar(x, y, xerr, yerr, linestyle="None", color='black')
+    plt.errorbar(x, y, yerr, xerr, linestyle="None", color='black')
 
     #find chi-squared in the slope
     expected = fit(values[1]) #takes the equation from the fit and calculates the expected values
                                     # from the x-values of your input
-    print "Expected values from fit:", expected            #prints the expected value, make sure they make sense!!!
-    print "Experimental values:", y
+    print "\n Expected values from fit:", expected            #prints the expected value, make sure they make sense!!!
+    print "\n Experimental values:", y
     chi_square = chisquare(y, expected, 1, None) #calculates chi-squared with experimental data
                                                             # third number is degrees of freedom
-    print "Chi_Squared:", chi_square.statistic
-    print "P-value :", chi_square.pvalue      #i hope you know what this does
+    print "\n Chi_Squared:", chi_square.statistic
+    print "\n P-value :", chi_square.pvalue      #i hope you know what this does
 
     #calculate standard error in slope
     linregression = linregress(x,y)
-    print "Standard Error:", linregression.stderr
+    print "\n Standard Error:", linregression.stderr
 
+    print "----------- End PlotData ----------- \n"
 
 def PlotFunction():
     #assing what values of x to use in form np.linspace(min,max,number of points to take)
     x = np.linspace(-2.1,0,100)
 
     y = abs(sin(3*x)) + 1
-
+           
     plt.plot(x, y, color ='red', label = 'BoobEyes')
 
     #semilog scale
@@ -124,6 +127,64 @@ def PlotFunction():
     #plt.loglog(x, y, basex=10, basey=10,  linestyle='-', marker = 'o', label = 'cookie')
 
 
+def FitFunction():
+    print "----------- Begin FitFunction -----------"
+    
+    #path to your data
+    filename = r'data2.xlsx'
+
+    #Sheet number in case it is .xlsx file;  won't have any effect for .txt and such
+    sheetnumb = 0
+
+    values = ImportData(filename, sheetnumb)
+
+    x = values[0]     #Column containing x-values
+    y = values[1]     #Column containing y-values
+    xerr = values[2]  #Column containing error values for x
+    yerr = values[3]  #Column containing error values for y
+    
+    #plot the data; index of values[i] corresponds to column #, starting with 0
+    plt.plot(x, y, marker = 'o', linestyle='None', label = 'Bumpy Bump', color = 'green')
+   
+    #plot the errorbars
+    plt.errorbar(x, y, yerr, xerr, linestyle="None", color='black')
+   
+   
+    # Desired fit Function
+    def func(x,a,b,c):
+        return a*np.exp(-((x-b)**2)/(4*c**2))
+
+    # Range of x-axis and number of points within range
+    x_space = np.linspace(1,7,1000)
+
+    # Initial Guess for Fitting Parameters
+    # Note that the order is that of func(x,a,b,c)
+    p0 = np.array((.75,4,1))
+
+    popt, pcov = curve_fit(func,x,y,p0)
+
+    # popt - optimal values for parmaters so that the
+    #  sum of the square error is minimized'
+    # The order here is [a,b,c] as in func(x,a,b,c)
+    print "\n Optimal values for parameters,"
+    print "  minimizing the sum of the square error:" 
+    print popt 
+
+    # pcov - estimated covariance of popt.
+    print "\n Covariance matrix for the fit:"
+    print pcov
+
+    # perr - standard deviation errors on the parameters
+    # Evaluated from the square root of the covariance diagonal
+    # The order here is again [a,b,c] as in func(x,a,b,c)
+    print "\n Standard deviations for the fit parameters: "
+    perr = np.sqrt(np.diag(pcov))
+    print perr
+
+    # Plots the fit to your provided function
+    plt.plot(x_space, func(x_space, *popt), 'r-', label=None, color ='blue')
+
+    print "\n ----------- End FitFunction -----------"
 
 #--------------No Need to Go beyond this point----------------------
 
