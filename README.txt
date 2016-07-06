@@ -1,9 +1,9 @@
 Setup:
 
-	- install Anaconda 2.7 distribution of Python
+	- install Anaconda 3 distribution of Python
 	  	  (https://store.continuum.io/cshop/anaconda)
-	- run 'data.xlsx' sample file in Spyder (included with Anaconda)
-
+	- run 'data1.xlsx' sample file to check everything is working properly
+	- run 'data2.xlsx' sample to test fitting routines [includes error bar data]
 
 Description:
 
@@ -12,16 +12,16 @@ Description:
 	  (-) .csv , .txt, .dat (tab, comma, or semicolon delimited)
 
 	- Plotting done as linear, semilog, or log functions
+	- Polynamial Fit, providing Chi-Sq, P-value, and StdErr
+	- Function Fit via least-square fit routine (initial parameter guess is necessary)
 
 Future Updates:
 
-       - Comprehensive fitting routines
-       - Error calculations
+       - Improve fitting routines
        - Multi-Dimensional Graphs
 
 Developer History:
 
-	  1) Platon Karpov (Creator)   
+	  1) Platon Karpov (Creator/Developer)   
 	  
 	  2) Patrick Payne (Developer) 
-	  
