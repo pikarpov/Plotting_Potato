@@ -3,16 +3,14 @@ This file is part of Plotting_Potato.
 Polynimial and function fitting functions are located here.
 
 -Platobob & Pat
-
 """
 
-from Plotting_Potato import ImportData, func
+from Plotting_Potato import func
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import chisquare
 from scipy.stats import linregress
 from scipy.optimize import curve_fit
-from sympy import *
 
 def FitPoly(name,x,y,degree):
     print("----------- Begin FitPoly -----------")    
@@ -38,6 +36,7 @@ def FitPoly(name,x,y,degree):
     print("\n Standard Error:", linregression.stderr)
     print("----------- End FitPoly -----------\n")    
 
+
 def FitFunction(name, x, y, a, **par):
 #def FitFunction(x, y):
     print("----------- Begin FitFunction -----------")
@@ -60,7 +59,7 @@ def FitFunction(name, x, y, a, **par):
     #  sum of the square error is minimized'
     # The order here is [a,b,c] as in func(x,a,b,c)
     print("Optimal values for parameters,")
-    print("  minimizing the sum of the square error:")
+    print("minimizing the sum of the square error:")
     print(popt)
 
     # pcov - estimated covariance of popt.
