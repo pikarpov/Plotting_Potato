@@ -27,7 +27,10 @@ from numpy import genfromtxt
 import xlrd
 import sys
 import numpy as np
-from Fitting import *
+try:
+    from Fitting import *
+except ImportError:
+    pass
 
 def main():
     #size of the plot window
@@ -47,12 +50,13 @@ def main():
     #Comment out whichever you don't need here
 
     x, y = PlotData('Cookies')   #plots the data; go to the function to indicta filename
+
+    PlotFunction('JokerEyes')
     
     #FitPoly('PolyFit',x,y,2)      #fits a polynomial [change the last parameter to the degree order]
 
     #FitFunction('FuncFit',x, y, a=0, b=0, c=0)       #lsqrfit a func() [edit below], must provide initial guess
-    
-    PlotFunction('JokerEyes')
+
     #---------------------
     
     #position of the legend, can be from 1 to 10
