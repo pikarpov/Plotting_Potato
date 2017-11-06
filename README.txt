@@ -1,6 +1,6 @@
 Setup:
 
-	- install Anaconda 3 distribution of Python
+	- install Anaconda distribution of Python 3
 	  	  (https://store.continuum.io/cshop/anaconda)
 	- run 'data1.xlsx' sample file to check everything is working properly
 	- run 'data2.xlsx' sample to test fitting routines [includes error bar data]
