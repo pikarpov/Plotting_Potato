@@ -49,7 +49,7 @@ def main():
     #What do you want to plot?
     #Comment out whichever you don't need here
 
-    x, y = PlotData('Cookies')   #plots the data; go to the function to indicta filename
+    x, y = PlotData('Smile')   #plots the data; go to the function to indicta filename
 
     PlotFunction('JokerEyes')
     
@@ -142,8 +142,7 @@ def ImportData(filename, sheetnumb):
         excel = True
 
     elif filename.endswith('.csv') or filename.endswith('.txt') or filename.endswith('.dat'):
-        print(r'Delimeter:  %r'% delimiter(filename))
-        content = genfromtxt(filename, delimiter=delimiter(filename))
+        content = genfromtxt(filename)
         column = len(content[0])
         row = len(content)
         excel = False
@@ -171,22 +170,6 @@ def ImportData(filename, sheetnumb):
 
         values.append(data)
     return values
-
-
-def delimiter(filename):
-    with open(filename, 'r') as content:
-        header=content.readline()
-        if header.find(";")!=-1:
-            return ";"
-        if header.find(",")!=-1:
-            return ","
-        if header.find("\t")!=-1:
-            return "\t"
-        if header.find("  ")!=-1:
-            return "  "    
-        if header.find(" ")!=-1:
-            return " "  
-    return "Could not detect column delimiter"
 
 
 def point(i,j, excel):
